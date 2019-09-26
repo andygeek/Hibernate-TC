@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 //Se usa el de Javax pq la de hibernete esta descontinuada
@@ -24,9 +26,9 @@ public class SocialMedia implements Serializable {
 	@Column(name = "icon")
 	private String icon;
 	
+	@OneToMany
+	@JoinColumn(name="id_social_media")
 	private Set<TeacherSocialMedia> teacherSocialMedias;
-
-	
 	
 	
 	public Set<TeacherSocialMedia> getTeacherSocialMedias() {

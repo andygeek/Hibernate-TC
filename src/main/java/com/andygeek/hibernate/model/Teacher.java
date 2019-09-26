@@ -3,11 +3,14 @@ package com.andygeek.hibernate.model;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,7 +26,16 @@ public class Teacher implements Serializable{
 	@Column(name = "avatar")
 	private String avatar;
 	//Un teacher puede tener muchos cursos
+	
+	//Un teacher tiene varios cursos
+	//Nuestra clase padre es Teacher y las clases hijos son Courses
+	//Ahora indicamos de que entidad viene los course (nombre de la entidad enlace)
+	@OneToMany(mappedBy = "teacher")
 	private Set<Course> courses;
+	
+	//Aqui colocamos la relacion de uno a  muchos
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_teacher")
 	private Set<TeacherSocialMedia> teacherSocialMedias;
 	
 	

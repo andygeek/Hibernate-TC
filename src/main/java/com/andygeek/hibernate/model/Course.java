@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +27,12 @@ public class Course implements Serializable{
 	@Column(name = "project")
 	private String project;
 	
+	//Aqui se coloca la etiqueta inversa
+	//Queremos añadir un curso sin necesidad de añadir un teacher osea es opcional
+	//el fectch forzara el manejador para que nos devuelva los datos de teacher
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
+	//Nombre del campo que esta en la tabla course y estoy intentando mapear
+	@JoinColumn(name="id_teacher")
 	private Teacher teacher;
 		
 	public Course() {
